@@ -46,7 +46,7 @@
   # };
 
   # Enable the X11 windowing system.
-  # services.xserver.enable = true;
+  #services.xserver.enable = true;
 
 
   
@@ -96,6 +96,10 @@
     firefox
     bash
     pavucontrol
+    home-manager
+  ];
+  fonts.packages = with pkgs; [
+      nerd-fonts.fira-code
   ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
 

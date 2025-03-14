@@ -15,5 +15,8 @@
 		grim
 		sway-contrib.grimshot
 	];
+	services.tlp.enable = true;
+	services.libinput.touchpad.naturalScrolling = true;
+
 }
 

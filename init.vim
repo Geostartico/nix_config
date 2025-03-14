@@ -6,8 +6,7 @@ set softtabstop=4
 set expandtab
 set shiftwidth=4
 set autoindent
-set number
-set wildmode=longest,list
+set number set wildmode=longest,list
 filetype plugin indent on
 syntax on
 set mouse=a
@@ -34,7 +33,7 @@ set encoding=utf-8
 " Plug 'tpope/vim-surround'
 " Plug 'mbbill/undotree'
 "call plug#end()
-let g:coc_global_extensions = [ 'coc-rust-analyzer' ]
+let g:coc_global_extensions = [ 'coc-rust-analyzer', 'coc-pyright' ]
 let mapleader = ","
 nnoremap <C-n> :NERDTreeToggle<CR>
 if (has("termguicolors"))

@@ -15,27 +15,34 @@
 		python3Full
     (neovim.override {
       vimAlias = true;
-      configure = {
-        customRC = ''
-	${builtins.readFile ./init.vim}
-	'';
-        packages.myPlugins = with pkgs.vimPlugins; {
-          start = [ 
-	  	
-		#vim plugins
-		vimPlugins.dracula-nvim
-		vimPlugins.vim-devicons
-		vimPlugins.ultisnips
-		vimPlugins.nerdtree
-		vimPlugins.nerdcommenter
-		vimPlugins.vim-startify
-		vimPlugins.coc-nvim
-		vimPlugins.nightfox-nvim
-]; 
-          opt = [];
-        };
-      };
+#      configure = {
+#        customRC = ''
+#	${builtins.readFile ./init.vim}
+#	'';
+#        packages.myPlugins = with pkgs.vimPlugins; {
+#          start = [ 
+#	  	
+#		#vim plugins
+#		vimPlugins.dracula-nvim
+#		vimPlugins.vim-devicons
+#		vimPlugins.ultisnips
+#		vimPlugins.nerdtree
+#		vimPlugins.nerdcommenter
+#		vimPlugins.vim-startify
+#		vimPlugins.coc-nvim
+#		vimPlugins.nightfox-nvim
+#]; 
+#          opt = [];
+#        };
+#      };
     }
-  )];
+  )
+  #3d data processing
+  opencv
+  cmake
+  gnumake
+  gcc
+  uv
+  ];
 }
 

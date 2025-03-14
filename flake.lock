@@ -20,11 +20,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1739446958,
-        "narHash": "sha256-+/bYK3DbPxMIvSL4zArkMX0LQvS7rzBKXnDXLfKyRVc=",
+        "lastModified": 1739866667,
+        "narHash": "sha256-EO1ygNKZlsAC9avfcwHkKGMsmipUk1Uc0TbrEZpkn64=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "2ff53fe64443980e139eaa286017f53f88336dd0",
+        "rev": "73cf49b8ad837ade2de76f87eb53fc85ed5d4680",
         "type": "github"
       },
       "original": {
@@ -62,8 +62,8 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1739647232,
-        "narHash": "sha256-I47kp8Yd4+1lVtmQTB77QErK8QRWnCM5/vWuWqdAbGk=",
+        "lastModified": 1739991954,
+        "narHash": "sha256-dRxzkHd7HXsTADS1XxpG9EU0pPvbFbA+M4WTeMECFyQ=",
         "path": "/home/geostartico/Code/rust",
         "type": "path"
       },
