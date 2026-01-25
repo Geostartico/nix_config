@@ -11,10 +11,17 @@ environment.systemPackages = with pkgs; [ grim
 		xdg-desktop-portal
 		xdg-desktop-portal-wlr
 		xdg-desktop-portal-gtk
+		#v4l2loopback
+		(wrapOBS {
+		    plugins = with obs-studio-plugins; [
+		      wlrobs
+		      obs-pipewire-audio-capture
+		    ];
+		  })
 	];
 	services.gnome.gnome-keyring.enable = true;
-	programs.river.enable = true;
-	programs.river.xwayland.enable = true;
+	programs.river-classic.enable = true;
+	programs.river-classic.xwayland.enable = true;
 	services.dbus.enable = true;
 	environment.sessionVariables = {
 		XDG_CURRENT_DESKTOP = "river";
@@ -24,18 +31,27 @@ environment.systemPackages = with pkgs; [ grim
 	xdg.portal = {
 		enable = true;
 		extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
-		config = {
+		wlr.enable = true;
+	        config = {
 			common = {
-				default = [ "wlr" ]; # Set preferred portal
+			  default = [ "wlr" "gtk" ];
+			};
+			river = {
+			  default = [ "wlr" "gtk" ];
 			};
 		};
+		#config = {
+		#	common = {
+		#		default = [ "wlr" ]; # Set preferred portal
+		#	};
+		#};
 	};
-	systemd.user.services.xdg-desktop-portal-gtk = {
-		enable=true;
-		environment = {
-			DISPLAY=":0";
-		};
-	};
+	#systemd.user.services.xdg-desktop-portal-gtk = {
+	#	enable=true;
+	#	environment = {
+	#		DISPLAY=":0";
+	#	};
+	#};
 	systemd.user.services.xdg-desktop-portal-wlr = {
 		environment = {
 			WAYLAND_DISPLAY="wayland-1";
@@ -57,5 +73,12 @@ environment.systemPackages = with pkgs; [ grim
 			wayland.compositor =  "weston";
 		};
 	};
+	boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback.out ];
+	boot.kernelModules = [ "v4l2loopback" ];
+
+	# Configure v4l2loopback
+	boot.extraModprobeConfig = ''
+	  options v4l2loopback devices=1 video_nr=10 card_label="OBS Virtual Camera" exclusive_caps=1
+	'';
 }
 

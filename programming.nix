@@ -10,9 +10,11 @@
 # List packages installed in system profile. To search, run:
 # $ nix search wget
  environment.systemPackages = with pkgs; [
- 		nodejs_23
+ 		nodejs_24
 		libgcc
-		python3Full
+		python315
+		python313
+		python311
     (neovim.override {
       vimAlias = true;
 #      configure = {

@@ -12,10 +12,13 @@
        ./utils.nix
        ./programming.nix
        ./steam.nix
+       ./nvidia.nix
     ];
-
+  nixpkgs.config.allowUnfree = true;
   # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = false;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.efiSysMountPoint = "/boot";
   boot.loader.grub.enable = true;
   boot.loader.grub.efiSupport = true;
   #boot.loader.grub.efiInstallAsRemovable = true;
@@ -31,8 +34,8 @@
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
-  networking.useDHCP = false;
-  networking.interfaces.wlo1.useDHCP = true;
+  # networking.useDHCP = false;
+  # networking.interfaces.wlo1.useDHCP = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -70,6 +73,7 @@
         support32Bit = true;
       };
       jack.enable = true;
+      wireplumber.enable = true;
     };
   };
   # hardware.pulseaudio.enable = true;
@@ -128,7 +132,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.05"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 
 }
 

@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ lib, ... }:
+{ lib, pkgs, ... }:
 
 {
 	nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
@@ -17,6 +17,9 @@
 	  dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
 	  localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
 	};
+	environment.systemPackages = with pkgs; [
+		discord
+	];
 
 }
 
