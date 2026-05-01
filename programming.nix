@@ -5,6 +5,8 @@
 { config, pkgs, ... }:
 
 {
+#TODO: remove when stable
+documentation.dev.enable = false;
 	imports =   [
 	];
 # List packages installed in system profile. To search, run:
@@ -12,9 +14,9 @@
  environment.systemPackages = with pkgs; [
  		nodejs_24
 		libgcc
-		python315
+		#python315
 		python313
-		python311
+		#python311
     (neovim.override {
       vimAlias = true;
 #      configure = {

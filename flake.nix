@@ -2,17 +2,22 @@
   description = "initial flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
+  outputs = { self, nixpkgs, nixpkgs-unstable, agenix, ... }@inputs:
+  let
+  pkgs-unstable = import nixpkgs-unstable { system = "x86_64-linux"; config.allowUnfree = false; };
+  in {
     nixosConfigurations = {
       geostartico = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs pkgs-unstable; };
         modules = [
           ./configuration.nix
-          # You can add more modules here if necessary
+	  agenix.nixosModules.default	
         ];
       };
     };

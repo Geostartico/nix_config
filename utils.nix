@@ -14,6 +14,9 @@
 		wtype
 		grim
 		sway-contrib.grimshot
+		killall
+		gimp
+		qpwgraph
 	];
 #	services.tlp.enable = true;
 	services.libinput.touchpad.naturalScrolling = true;

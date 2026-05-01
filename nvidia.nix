@@ -8,7 +8,16 @@
 
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
+  virtualisation.docker = {
+  enable = true;
 
+  # Add NVIDIA runtime and make it default
+  extraOptions = ''
+    --add-runtime=nvidia=nvidia-container-runtime
+  '';
+  };
+  users.users.geostartico.extraGroups = [ "docker" ];
+  hardware.nvidia-container-toolkit.enable = true;
   hardware.nvidia = {
 
     # Modesetting is required.
@@ -51,6 +60,8 @@
   ];
 };
   environment.systemPackages = with pkgs; [
+  	nvidia-container-toolkit
+	libnvidia-container
   ];
 }
 

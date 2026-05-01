@@ -11,6 +11,7 @@ environment.systemPackages = with pkgs; [ grim
 		xdg-desktop-portal
 		xdg-desktop-portal-wlr
 		xdg-desktop-portal-gtk
+		xfce.thunar
 		#v4l2loopback
 		(wrapOBS {
 		    plugins = with obs-studio-plugins; [
