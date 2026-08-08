@@ -1,5 +1,14 @@
 # Edit this configuration file to define what should be installed on your system.  Help is available in the configuration.nix(5) man page and in the NixOS manual (accessible by running ‘nixos-help’).
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+let   minimalSddmTheme = pkgs.where-is-my-sddm-theme.override {
+    themeConfig.General = {
+      showUsersByDefault = true;
+      usersFontSize = 48;
+      showSessionsByDefault = true;
+      sessionsFontSize = 24;
+    };
+  };
+in {
 #List packages installed in system profile. To search, run: $ nix search wget
 environment.systemPackages = with pkgs; [ grim
 		slurp
@@ -19,10 +28,15 @@ environment.systemPackages = with pkgs; [ grim
 		      obs-pipewire-audio-capture
 		    ];
 		  })
+		minimalSddmTheme
 	];
 	services.gnome.gnome-keyring.enable = true;
 	programs.river-classic.enable = true;
 	programs.river-classic.xwayland.enable = true;
+	programs.sway = {
+          enable = true;
+          wrapperFeatures.gtk = true;
+        };
 	services.dbus.enable = true;
 	environment.sessionVariables = {
 		XDG_CURRENT_DESKTOP = "river";
@@ -72,6 +86,10 @@ environment.systemPackages = with pkgs; [ grim
 			enable = true;
 			wayland.enable = true;
 			wayland.compositor =  "weston";
+		        theme = "where_is_my_sddm_theme"; # underscores — this is the actual theme dir name, NOT the package name
+                        extraPackages = [
+				minimalSddmTheme
+                        ];
 		};
 	};
 	boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback.out ];

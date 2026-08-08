@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ lib, pkgs, pkgs-unstable, ... }:
+{ lib, pkgs, ... }:
 
 {
 	nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
@@ -21,7 +21,8 @@
 		discord
 		gzdoom
 		doomrunner
-	] ++ [pkgs-unstable.uzdoom];
+		uzdoom
+	];
 
 }
 

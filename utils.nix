@@ -17,6 +17,8 @@
 		killall
 		gimp
 		qpwgraph
+		unzip
+		onlyoffice-desktopeditors
 	];
 #	services.tlp.enable = true;
 	services.libinput.touchpad.naturalScrolling = true;
