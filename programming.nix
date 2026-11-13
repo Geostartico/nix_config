@@ -47,6 +47,13 @@ documentation.dev.enable = false;
   gnumake
   gcc
   uv
-  ];
+  vscode.fhs
+    rustc
+  cargo
+  clippy
+  rustfmt
+  rust-analyzer
+];
+environment.variables.RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
 }
 

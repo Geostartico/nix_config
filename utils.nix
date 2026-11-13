@@ -19,6 +19,7 @@
 		qpwgraph
 		unzip
 		onlyoffice-desktopeditors
+		qbittorrent
 	];
 #	services.tlp.enable = true;
 	services.libinput.touchpad.naturalScrolling = true;

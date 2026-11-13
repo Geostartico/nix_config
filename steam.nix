@@ -22,7 +22,12 @@
 		gzdoom
 		doomrunner
 		uzdoom
+		lutris
+		proton-vpn
+		dolphin-emu-primehack
+		gamescope
 	];
+	hardware.xpadneo.enable = true;
 
 }
 

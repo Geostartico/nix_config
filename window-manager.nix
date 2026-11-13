@@ -35,8 +35,7 @@ environment.systemPackages = with pkgs; [ grim
 	programs.river-classic.xwayland.enable = true;
 	programs.sway = {
           enable = true;
-          wrapperFeatures.gtk = true;
-        };
+          wrapperFeatures.gtk = true; };
 	services.dbus.enable = true;
 	environment.sessionVariables = {
 		XDG_CURRENT_DESKTOP = "river";
@@ -45,21 +44,12 @@ environment.systemPackages = with pkgs; [ grim
 	};
 	xdg.portal = {
 		enable = true;
-		extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
 		wlr.enable = true;
-	        config = {
-			common = {
-			  default = [ "wlr" "gtk" ];
-			};
-			river = {
-			  default = [ "wlr" "gtk" ];
-			};
+		extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+		config = {
+			common.default = [ "wlr" "gtk" ];
+			river.default = [ "wlr" "gtk" ];
 		};
-		#config = {
-		#	common = {
-		#		default = [ "wlr" ]; # Set preferred portal
-		#	};
-		#};
 	};
 	#systemd.user.services.xdg-desktop-portal-gtk = {
 	#	enable=true;
@@ -67,19 +57,23 @@ environment.systemPackages = with pkgs; [ grim
 	#		DISPLAY=":0";
 	#	};
 	#};
-	systemd.user.services.xdg-desktop-portal-wlr = {
-		environment = {
-			WAYLAND_DISPLAY="wayland-1";
-		};
-		enable = true;
-		wantedBy = [ "multi-user.target" ];
-		after = [ "network.target" ];  # Ensures it starts after the Wayland session is up
-		serviceConfig = {
-			ExecStart = "${pkgs.bash}/bin/bash -c 'echo Starting my service; /path/to/your/service/executable'";
-			ExecStartPre = "${pkgs.coreutils}/bin/sleep 1"; # Delay of 10 seconds before starting the service
-		};
+	#systemd.user.services.xdg-desktop-portal-wlr = {
+	#	environment = {
+	#		WAYLAND_DISPLAY="wayland-1";
+	#	};
+	#	enable = true;
+	#	wantedBy = [ "multi-user.target" ];
+	#	after = [ "network.target" ];  # Ensures it starts after the Wayland session is up
+	#	serviceConfig = {
+	#		ExecStart = "${pkgs.bash}/bin/bash -c 'echo Starting my service; /path/to/your/service/executable'";
+	#		ExecStartPre = "${pkgs.coreutils}/bin/sleep 1"; # Delay of 10 seconds before starting the service
+	#	};
 
-	};
+	#};
+	#xdg.portal.wlr.settings.screencast = {
+	#	output_name = "DP-4";   # replace with yours
+	#	chooser_type = "none";
+	#};
 	services.displayManager = {
 		enable = true;
 		sddm = {
@@ -92,8 +86,24 @@ environment.systemPackages = with pkgs; [ grim
                         ];
 		};
 	};
-	boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback.out ];
+	boot.extraModulePackages = with config.boot.kernelPackages; [
+	   v4l2loopback
+	];
+
 	boot.kernelModules = [ "v4l2loopback" ];
+
+	#programs.obs-studio = {
+	#  enable = true;
+	#  enableVirtualCamera = true;
+	#  plugins = with pkgs.obs-studio-plugins; [
+	#    wlrobs
+	#    obs-pipewire-audio-capture
+	#  ];
+	#};
+
+	services.xserver.enable = true;
+	services.xserver.videoDrivers = [ "nvidia" ];
+	services.xserver.desktopManager.xfce.enable = true;
 
 	# Configure v4l2loopback
 	boot.extraModprobeConfig = ''
